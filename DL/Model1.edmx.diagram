@@ -7,6 +7,8 @@
       <Diagram DiagramId="294beceaedbe44fa882e892c71934bd6" Name="Diagram1">
         <EntityTypeShape EntityType="AeroMexicoModel.Pasajero" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AeroMexicoModel.Usuario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeroMexicoModel.Vuelo" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="AeroMexicoModel.FK__Vuelos__IdPasaje__173876EA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

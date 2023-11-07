@@ -29,6 +29,7 @@ namespace DL
     
         public virtual DbSet<Pasajero> Pasajeros { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Vuelo> Vuelos { get; set; }
     
         public virtual int AddPasajero(string nombre, string apellidoPaterno, string apellidoMaterno)
         {
@@ -59,6 +60,19 @@ namespace DL
                 new ObjectParameter("Usuario", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByUsuario_Result>("GetByUsuario", usuarioParameter);
+        }
+    
+        public virtual ObjectResult<GetAllVuelos_Result> GetAllVuelos(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaSalida)
+        {
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllVuelos_Result>("GetAllVuelos", fechaInicioParameter, fechaSalidaParameter);
         }
     }
 }

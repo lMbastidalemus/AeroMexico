@@ -14,9 +14,18 @@ namespace DL
     
     public partial class Pasajero
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pasajero()
+        {
+            this.Vuelos = new HashSet<Vuelo>();
+        }
+    
         public int IdPasajero { get; set; }
         public string Nombre { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vuelo> Vuelos { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model ML.Vuelos
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="margin-top:5rem; margin-bottom:5rem">
+    <h2>Busca tu vuelo!!</h2>
+</div>
+@using (Html.BeginForm("GetAll", "Vuelos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="display:flex; justify-content:center">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FechaInicio)
+            <br />
+            @Html.TextBoxFor(model => model.FechaInicio, new { @class = "form-control", @type = "date" })
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FechaSalida)
+            <br />
+            @Html.TextBoxFor(model => model.FechaSalida, new { @class = "form-control", @type = "date" })
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-dark" type="submit" style="margin-bottom:2rem">Buscar Vuelos</button>
+    </div>
+
+}
+
+
