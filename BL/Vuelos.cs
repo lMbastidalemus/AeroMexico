@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.AeroMexicoEntities context = new DL.AeroMexicoEntities())
+                using (DL.AeroMexicoEntities1 context = new DL.AeroMexicoEntities1())
                 {
                     var query = context.GetAllVuelos(vuelos.FechaInicio, vuelos.FechaSalida);
                     if(query != null)

@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.AeroMexicoEntities contex = new DL.AeroMexicoEntities())
+                using (DL.AeroMexicoEntities1 contex = new DL.AeroMexicoEntities1())
                 {
                     var query = contex.GetByUsuario(Usuario).FirstOrDefault();
                     if (query != null)

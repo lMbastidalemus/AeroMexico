@@ -25,16 +25,18 @@ namespace ExamenAeroMexico.Controllers
                
                 if(Usuario == usuarioIngresado.Usuario && Password == usuarioIngresado.Password)
                 {
-                    result.ErrorMessage = "Autorice";
+                    ViewBag.Mensaje = "Autorice";
+                    return PartialView("Modal");
                 }
-                else
-                {
-                    result.ErrorMessage = "No Autorice";
-
-                }
+                
               
             }
-            return View(result.ErrorMessage);
+            else
+            {
+                ViewBag.Mensaje = "No Autorice";
+
+            }
+            return PartialView("Modal");
         }
     }
 }

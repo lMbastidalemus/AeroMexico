@@ -11,7 +11,16 @@ namespace ExamenAeroMexico.Controllers
         // GET: Vuelos
         public ActionResult GetAll()
         {
+           
             return View();
         }
+
+        public ActionResult Vuelos(ML.Vuelos vuelos)
+        {
+            return View(vuelos);
+
+        }
+
+       
     }
 }
