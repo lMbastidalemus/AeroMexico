@@ -1,0 +1,51 @@
+﻿@model ML.Pasajeros
+
+
+
+@using (Html.BeginForm("Form", "Pasajeros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+   
+    <form>
+
+        <fieldset>
+            <legend>Datos del nuevo usuario</legend>
+
+
+
+            <div class=" container row" style="margin-left:10rem">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Nombre) @*Se muestra visualmente el nombre del campo (label)*@
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" }) @*Se obtiene lo ingresado en la caja de texto*@
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ApellidoPaterno)
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                   
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ApellidoMaterno)
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                   
+                </div>
+            </div>
+
+          
+            <div class="row" style="margin-left:30rem">
+                <div class="col-md-6" style="padding:4rem">
+                    <button id="boton-guardar" onmouseover="Botones()" type="submit" class="btn btn-success "><i class="fa-solid fa-floppy-disk fa-2xl" style="margin-right:2rem"></i>Agregar Usuario</button>
+
+                </div>
+               
+            </div>
+
+
+
+        </fieldset>
+
+
+    </form>
+}
+
+

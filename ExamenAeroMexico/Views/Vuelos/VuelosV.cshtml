@@ -1,0 +1,20 @@
+﻿@model ML.Vuelos
+
+<div class="card w-75"  style="margin-top:5rem">
+    @foreach (ML.Vuelos vuelos in Model.Vueloss)
+    {
+        <div class="col" >
+            <div class="card" style="background:#5bee7d">
+
+                <div class="card-body" style="padding:25px; margin-top:-15px">
+                    <h5 class="card-title" style="color:rgb(0,91,220)">Numero de vuelo: @vuelos.NumeroVuelo</h5>
+                    <p class="card-text">Origen: @vuelos.Origen</p>
+                    <p class="card-text">Destino: @vuelos.Destino</p>
+                    <h5 class="card-title" style="color:rgb(0,91,220)">Fecha de Salida: @vuelos.FechaSalida</h5>
+                </div>
+                <a class="btn btn-success" href="@Url.Action("Reservacion", "Vuelos", new {NumeroVuelo = vuelos.NumeroVuelo})">Seleccionar vuelo</a>
+
+            </div>
+        </div>
+    }
+</div>

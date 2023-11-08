@@ -33,7 +33,7 @@
           <Property Name="FechaSalida" Type="datetime" Nullable="false" />
           <Property Name="IdPasajero" Type="int" />
         </EntityType>
-        <Association Name="FK__Vuelos__IdPasaje__5CD6CB2B">
+        <Association Name="FK__Vuelos__IdPasaje__173876EA">
           <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="0..1" />
           <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -62,7 +62,7 @@
           <EntitySet Name="Pasajeros" EntityType="Self.Pasajeros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vuelos" EntityType="Self.Vuelos" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Vuelos__IdPasaje__5CD6CB2B" Association="Self.FK__Vuelos__IdPasaje__5CD6CB2B">
+          <AssociationSet Name="FK__Vuelos__IdPasaje__173876EA" Association="Self.FK__Vuelos__IdPasaje__173876EA">
             <End Role="Pasajeros" EntitySet="Pasajeros" />
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
@@ -80,7 +80,7 @@
           <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ApellidoPaterno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ApellidoMaterno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Vuelos" Relationship="Self.FK__Vuelos__IdPasaje__5CD6CB2B" FromRole="Pasajeros" ToRole="Vuelos" />
+          <NavigationProperty Name="Vuelos" Relationship="Self.FK__Vuelos__IdPasaje__173876EA" FromRole="Pasajeros" ToRole="Vuelos" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -100,9 +100,9 @@
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdPasajero" Type="Int32" />
-          <NavigationProperty Name="Pasajero" Relationship="Self.FK__Vuelos__IdPasaje__5CD6CB2B" FromRole="Vuelos" ToRole="Pasajeros" />
+          <NavigationProperty Name="Pasajero" Relationship="Self.FK__Vuelos__IdPasaje__173876EA" FromRole="Vuelos" ToRole="Pasajeros" />
         </EntityType>
-        <Association Name="FK__Vuelos__IdPasaje__5CD6CB2B">
+        <Association Name="FK__Vuelos__IdPasaje__173876EA">
           <End Role="Pasajeros" Type="Self.Pasajero" Multiplicity="0..1" />
           <End Role="Vuelos" Type="Self.Vuelo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,11 +114,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AeroMexicoEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AeroMexicoEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Pasajeros" EntityType="Self.Pasajero" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
           <EntitySet Name="Vuelos" EntityType="Self.Vuelo" />
-          <AssociationSet Name="FK__Vuelos__IdPasaje__5CD6CB2B" Association="Self.FK__Vuelos__IdPasaje__5CD6CB2B">
+          <AssociationSet Name="FK__Vuelos__IdPasaje__173876EA" Association="Self.FK__Vuelos__IdPasaje__173876EA">
             <End Role="Pasajeros" EntitySet="Pasajeros" />
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
@@ -157,7 +157,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AeroMexicoModelStoreContainer" CdmEntityContainer="AeroMexicoEntities1">
+        <EntityContainerMapping StorageEntityContainer="AeroMexicoModelStoreContainer" CdmEntityContainer="AeroMexicoEntities2">
           <EntitySetMapping Name="Pasajeros">
             <EntityTypeMapping TypeName="AeroMexicoModel.Pasajero">
               <MappingFragment StoreEntitySet="Pasajeros">
@@ -235,7 +235,7 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

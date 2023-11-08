@@ -1,0 +1,16 @@
+﻿@model ML.Vuelos
+@{
+    ViewBag.Title = "Reservacion";
+}
+
+<div class="row">
+    <div class="col-md4">
+        @Html.LabelFor(model => model.NumeroVuelo)
+        @Html.DropDownListFor(model => model.NumeroVuelo, new SelectList(Model.Vueloss, "NumeroVuelo", "Origen", "Destino"))
+    </div>
+    <div class="col-md4">
+        @Html.LabelFor(model => model.Pasajero.IdPasajero)
+        @Html.DropDownListFor(model => model.Pasajero.IdPasajero, new SelectList(Model.Pasajero.Pasajeross, "IdPasajero", "Nombre"), "selecciona un pasajero")
+    </div>
+</div>
+

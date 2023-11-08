@@ -5,12 +5,12 @@
 }
 
 
-<div style="margin-top:5rem; margin-bottom:5rem">
+<div style="margin-top:5rem; margin-bottom:5rem;margin-bottom:3rem">
     <h2>Busca tu vuelo!!</h2>
 </div>
 <div style="display: grid; grid-template-rows: repeat(2, 50px); ">
     <div>
-        @using (Html.BeginForm("Vuelos", "Vuelos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("VuelosV", "Vuelos", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
             <div style="display:flex; flex-direction:column; justify-content:space-between">
@@ -41,22 +41,5 @@
 </div>
 
 
-@*<div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-        @foreach (ML.Vuelos vuelos in Model.Vueloss)
-        {
-            <div class="col">
-                <div class="card">
-
-                    <div class="card-body" style="padding:25px; margin-top:-15px">
-                        <h5 class="card-title" style="color:rgb(0,91,220)">@vuelos.NumeroVuelo</h5>
-                        <p class="card-text">@vuelos.Origen</p>
-                        <p class="card-text">@vuelos.Destino</p>
-                        <h5 class="card-title" style="color:rgb(0,91,220)">@vuelos.FechaSalida</h5>
-                    </div>
-
-                </div>
-            </div>
-        }
-    </div>*@
 
 

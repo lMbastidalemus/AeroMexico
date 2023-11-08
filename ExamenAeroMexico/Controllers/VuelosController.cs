@@ -11,15 +11,32 @@ namespace ExamenAeroMexico.Controllers
         // GET: Vuelos
         public ActionResult GetAll()
         {
-           
+          
             return View();
         }
 
-        public ActionResult Vuelos(ML.Vuelos vuelos)
+        [HttpPost]
+        public ActionResult VuelosV(ML.Vuelos vuelos)
         {
+            
+            ML.Result resultVuelos = BL.Vuelos.GetAll(vuelos);
+            vuelos = new ML.Vuelos();
+            vuelos.Vueloss = resultVuelos.Objects;
             return View(vuelos);
 
         }
+
+        public ActionResult Reservacion()
+        {
+            ML.Vuelos vuelos = new ML.Vuelos();
+            ML.Result result = BL.Vuelos.GetAll(vuelos);
+            vuelos.Vueloss = result.Objects;
+            vuelos.Pasajero = new ML.Pasajeros();
+            ML.Result resultPasajero = BL.Pasajeross.GetAll();
+            vuelos.Pasajero.Pasajeross = resultPasajero.Objects;
+            return View(vuelos);
+        }
+
 
        
     }
