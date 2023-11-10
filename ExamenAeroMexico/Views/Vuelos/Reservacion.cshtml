@@ -4,13 +4,17 @@
 }
 
 <div class="row">
-    <div class="col-md4">
-        @Html.LabelFor(model => model.NumeroVuelo)
-        @Html.DropDownListFor(model => model.NumeroVuelo, new SelectList(Model.Vueloss, "NumeroVuelo", "Origen", "Destino"))
-    </div>
-    <div class="col-md4">
-        @Html.LabelFor(model => model.Pasajero.IdPasajero)
-        @Html.DropDownListFor(model => model.Pasajero.IdPasajero, new SelectList(Model.Pasajero.Pasajeross, "IdPasajero", "Nombre"), "selecciona un pasajero")
-    </div>
+    @using (Html.BeginForm("Reservacion", "Vuelos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="col-md4" style="margin-left:20rem;margin-bottom:5rem; margin-top:3rem">
+            @Html.LabelFor(model => model.NumeroVuelo)
+            @Html.DropDownListFor(model => model.NumeroVuelo, new SelectList(Model.Vueloss, "NumeroVuelo", "Origen"), "selecciona un vuelo")
+        </div>
+        <div class="col-md4" style="margin-left:20rem">
+            @Html.LabelFor(model => model.Pasajero.IdPasajero)
+            @Html.DropDownListFor(model => model.Pasajero.IdPasajero, new SelectList(Model.Pasajero.Pasajeross, "IdPasajero", "Nombre"), "selecciona un pasajero")
+        </div>
+       <button class="btn btn-success" type="submit">Reservar</button>
+    }
 </div>
 

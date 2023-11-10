@@ -212,6 +212,7 @@
     <Content Include="Views\Vuelos\Reservacion.cshtml" />
     <Content Include="Views\Pasajeros\Form.cshtml" />
     <Content Include="Views\Pasajeros\Modal.cshtml" />
+    <Content Include="Views\Vuelos\Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AeroMexicoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AeroMexicoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Pasajeros">
           <Key>
             <PropertyRef Name="IdPasajero" />
@@ -14,6 +14,12 @@
           <Property Name="ApellidoPaterno" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="ApellidoMaterno" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'AeroMexico.dbo.Reservacion' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Reservacion">
+          <Property Name="NumeroVuelo" Type="varchar" MaxLength="4" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+        </EntityType>-->
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -33,6 +39,9 @@
           <Property Name="FechaSalida" Type="datetime" Nullable="false" />
           <Property Name="IdPasajero" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+error 6004: The table 'AeroMexico.dbo.Reservacion' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__Reservaci__Numer__20C1E124" />-->
         <Association Name="FK__Vuelos__IdPasaje__173876EA">
           <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="0..1" />
           <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
@@ -51,12 +60,17 @@
           <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllVuelos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetByUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Usuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ReservacionN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroVuelo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="AeroMexicoModelStoreContainer">
           <EntitySet Name="Pasajeros" EntityType="Self.Pasajeros" Schema="dbo" store:Type="Tables" />
@@ -67,8 +81,7 @@
             <End Role="Vuelos" EntitySet="Vuelos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AeroMexicoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -133,7 +146,12 @@
             <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetByUsuario" ReturnType="Collection(AeroMexicoModel.GetByUsuario_Result)">
-            <Parameter Name="Usuario" Mode="In" Type="String" />
+          <Parameter Name="Usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllR" ReturnType="Collection(AeroMexicoModel.GetAllR_Result)" />
+          <FunctionImport Name="ReservacionN">
+            <Parameter Name="NumeroVuelo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAll_Result">
@@ -151,6 +169,10 @@
         <ComplexType Name="GetByUsuario_Result">
           <Property Type="String" Name="Usuario" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllR_Result">
+          <Property Type="String" Name="NumeroVuelo" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Origen" Nullable="false" MaxLength="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -218,6 +240,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllR" FunctionName="AeroMexicoModel.Store.GetAllR">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AeroMexicoModel.GetAllR_Result">
+                <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReservacionN" FunctionName="AeroMexicoModel.Store.ReservacionN" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

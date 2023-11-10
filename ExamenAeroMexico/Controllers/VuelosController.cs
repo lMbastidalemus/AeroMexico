@@ -19,7 +19,7 @@ namespace ExamenAeroMexico.Controllers
         public ActionResult VuelosV(ML.Vuelos vuelos)
         {
             
-            ML.Result resultVuelos = BL.Vuelos.GetAll(vuelos);
+            ML.Result resultVuelos = BL.Vuelos.GetAll(vuelos.FechaInicio, vuelos.FechaSalida);
             vuelos = new ML.Vuelos();
             vuelos.Vueloss = resultVuelos.Objects;
             return View(vuelos);
@@ -28,8 +28,9 @@ namespace ExamenAeroMexico.Controllers
 
         public ActionResult Reservacion()
         {
+
             ML.Vuelos vuelos = new ML.Vuelos();
-            ML.Result result = BL.Vuelos.GetAll(vuelos);
+            ML.Result result = BL.Vuelos.GetAllR();
             vuelos.Vueloss = result.Objects;
             vuelos.Pasajero = new ML.Pasajeros();
             ML.Result resultPasajero = BL.Pasajeross.GetAll();
@@ -37,6 +38,20 @@ namespace ExamenAeroMexico.Controllers
             return View(vuelos);
         }
 
+        [HttpPost]
+        public ActionResult Reservacion(string NumeroVuelo, string Nombre)
+        {
+            ML.Result result = BL.Reservacion.Add(NumeroVuelo, Nombre);
+            if (result.Correct)
+            {
+                ViewBag.Mensaje = "Add";
+            }
+            else
+            {
+                ViewBag.Mensaje = "Error";
+            }
+            return PartialView("Modal");
+        }
 
        
     }

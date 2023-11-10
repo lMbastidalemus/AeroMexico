@@ -16,15 +16,15 @@ namespace ExamenAeroMexico.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(ML.Usuarios usuarios)
+        public ActionResult Login(string Usuario, string Password)
         {
 
             //ML.Result result = BL.Usuarios.GetByUsuario(Usuario, Password);
             //if (result.Correct)
             //{
-            //   ML.Usuarios usuarioIngresado = (ML.Usuarios)result.Object;
+            //    ML.Usuarios usuarioIngresado = (ML.Usuarios)result.Object;
 
-            //    if(Usuario == usuarioIngresado.Usuario && Password == usuarioIngresado.Password)
+            //    if (Usuario == usuarioIngresado.Usuario && Password == usuarioIngresado.Password)
             //    {
             //        ViewBag.Mensaje = "Autorice";
             //        return PartialView("Modal");
@@ -44,7 +44,7 @@ namespace ExamenAeroMexico.Controllers
             {
 
                 client.BaseAddress = new Uri(urlAPI);
-                var responseTask = client.GetAsync("usuario/" + usuarios);
+                var responseTask = client.GetAsync("usuario/" + Usuario + Password);
                 responseTask.Wait();
                 var resultAPI = responseTask.Result;
 

@@ -74,5 +74,23 @@ namespace DL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByUsuario_Result>("GetByUsuario", usuarioParameter);
         }
+    
+        public virtual ObjectResult<GetAllR_Result> GetAllR()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllR_Result>("GetAllR");
+        }
+    
+        public virtual int ReservacionN(string numeroVuelo, string nombre)
+        {
+            var numeroVueloParameter = numeroVuelo != null ?
+                new ObjectParameter("NumeroVuelo", numeroVuelo) :
+                new ObjectParameter("NumeroVuelo", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ReservacionN", numeroVueloParameter, nombreParameter);
+        }
     }
 }
